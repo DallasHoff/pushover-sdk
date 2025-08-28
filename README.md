@@ -13,7 +13,10 @@ A TypeScript SDK for calling [Pushover APIs](https://pushover.net/api) from any 
 ```typescript
 import { Pushover } from 'pushover-sdk';
 
-const pushover = new Pushover({ token: 'egn0tactva1lyarea1t0k3n' });
+const pushover = new Pushover({
+	token: 'egn0tactva1lyarea1t0k3n',
+	user: 's0mepush0v3rus3rid',
+});
 
 await pushover.sendMessage('This is a push notification!');
 ```
