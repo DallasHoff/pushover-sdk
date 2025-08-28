@@ -1,6 +1,7 @@
 import type { PushoverResponse } from './pushover.js';
 
 export type MessageOptions = {
+	message: string;
 	user?: string | string[];
 	device?: string | string[];
 	sound?: Sound;

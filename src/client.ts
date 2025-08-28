@@ -90,13 +90,14 @@ export class Pushover {
 	 * @link https://pushover.net/api
 	 */
 	sendMessage = async (
-		message: string,
-		options: MessageOptions = {},
+		message: string | MessageOptions,
 	): Promise<MessageResponse> => {
+		const options = typeof message === 'string' ? { message } : message;
+
 		const parameters: MessageParameters = {
 			token: this.token,
 			user: normalizeUser(normalizeList(options.user) ?? this.user),
-			message,
+			message: options.message,
 			callback:
 				'callback' in options ? normalizeUrl(options.callback) : undefined,
 			device: normalizeList(options.device),
