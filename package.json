@@ -1,0 +1,48 @@
+{
+	"name": "pushover-sdk",
+	"version": "0.0.0",
+	"type": "module",
+	"sideEffects": false,
+	"zshy": "./src/index.ts",
+	"scripts": {
+		"build": "zshy",
+		"typecheck": "tsc --noEmit",
+		"format": "prettier . --write",
+		"prepublishOnly": "npm run build"
+	},
+	"devDependencies": {
+		"prettier": "^3.6.2",
+		"typescript": "^5.9.2",
+		"zshy": "^0.3.5"
+	},
+	"files": [
+		"dist",
+		"src"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/DallasHoff/pushover-sdk.git"
+	},
+	"author": "Dallas Hoffman",
+	"license": "MIT",
+	"description": "Call Pushover's APIs from any JavaScript runtime with fully typed inputs and responses.",
+	"keywords": [
+		"pushover",
+		"sdk",
+		"fetch",
+		"notifications",
+		"push",
+		"alerting",
+		"iot"
+	],
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.cts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.cts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	}
+}
