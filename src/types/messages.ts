@@ -74,31 +74,33 @@ export enum Priority {
 	EMERGENCY = 2,
 }
 
-export type Sound =
-	| (string & {})
-	| 'pushover'
-	| 'bike'
-	| 'bugle'
-	| 'cashregister'
-	| 'classical'
-	| 'cosmic'
-	| 'falling'
-	| 'gamelan'
-	| 'incoming'
-	| 'intermission'
-	| 'magic'
-	| 'mechanical'
-	| 'pianobar'
-	| 'siren'
-	| 'spacealarm'
-	| 'tugboat'
-	| 'alien'
-	| 'climb'
-	| 'persistent'
-	| 'echo'
-	| 'updown'
-	| 'vibrate'
-	| 'none';
+export const sounds = [
+	'pushover',
+	'bike',
+	'bugle',
+	'cashregister',
+	'classical',
+	'cosmic',
+	'falling',
+	'gamelan',
+	'incoming',
+	'intermission',
+	'magic',
+	'mechanical',
+	'pianobar',
+	'siren',
+	'spacealarm',
+	'tugboat',
+	'alien',
+	'climb',
+	'persistent',
+	'echo',
+	'updown',
+	'vibrate',
+	'none',
+] as const;
+
+export type Sound = (string & {}) | (typeof sounds)[number];
 
 export type MessageResponse = PushoverResponse & {
 	receipt?: string;
