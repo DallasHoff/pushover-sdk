@@ -38,6 +38,7 @@ import type {
 	GroupSelectUserOptions,
 	GroupSelectUserParameters,
 } from './types/groups.js';
+import { PushoverResponseError } from './errors.js';
 
 export class Pushover {
 	token: string;
@@ -79,7 +80,7 @@ export class Pushover {
 		const data = (await res.json()) as T;
 
 		if (data.status !== 1) {
-			throw new Error(JSON.stringify(data));
+			throw new PushoverResponseError(JSON.stringify(data));
 		}
 
 		return data;

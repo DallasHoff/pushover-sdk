@@ -1,3 +1,5 @@
+import { PushoverParameterError } from './errors.js';
+
 export function normalizeInt(input: number | undefined): string | undefined {
 	return typeof input === 'number' ? Math.round(input).toString() : undefined;
 }
@@ -38,7 +40,7 @@ export function normalizeList(
 
 export function normalizeUser(input: string | undefined): string {
 	if (!input) {
-		throw new Error('No user specified');
+		throw new PushoverParameterError('No user specified');
 	}
 	return input;
 }
