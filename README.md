@@ -6,6 +6,7 @@ A TypeScript SDK for calling [Pushover APIs](https://pushover.net/api) from any 
 - ⚙️ Supports Node.js, Deno, Bun, Cloudflare Workers... anything with the standard Fetch API
 - 🔋 Fully supports the entire Pushover API, including Receipts, Glances, Groups, and Teams
 - 🛠️ Every method has TypeScript types for the arguments each endpoint takes and what it returns
+- 🤝 Works with ESM and CommonJS codebases
 - ⚡️ Tiny: no dependencies
 
 ## Example
