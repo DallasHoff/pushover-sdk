@@ -8,6 +8,7 @@ export type GlanceOptions = {
 	percent?: number;
 };
 
+/** @internal */
 export type GlanceParameters = {
 	token: string;
 	user: string;

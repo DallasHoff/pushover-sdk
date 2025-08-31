@@ -7,6 +7,7 @@ export type TeamOptions = {
 	group?: string;
 };
 
+/** @internal */
 export type TeamParameters = {
 	token: string;
 	email: string;

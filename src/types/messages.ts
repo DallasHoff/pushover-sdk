@@ -43,6 +43,7 @@ export type MessageOptions = {
 		  }
 	);
 
+/** @internal */
 export type MessageParameters = {
 	token: string;
 	user: string;

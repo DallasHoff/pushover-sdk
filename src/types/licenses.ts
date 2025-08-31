@@ -8,6 +8,7 @@ export type LicenseOptions = {
 	os?: LicenseOperatingSystem;
 } & ({ user: string } | { email: string });
 
+/** @internal */
 export type LicenseParameters = {
 	token: string;
 	user: string | undefined;

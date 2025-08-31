@@ -9,5 +9,6 @@
 		"NPM": "https://www.npmjs.com/package/pushover-sdk"
 	},
 	"headings": { "readme": false },
-	"kindSortOrder": ["Class", "TypeAlias", "Enum", "Variable"]
+	"kindSortOrder": ["Class", "TypeAlias", "Enum", "Variable"],
+	"excludeInternal": true
 }

@@ -3,6 +3,7 @@ export type PushoverOptions = {
 	user?: string;
 };
 
+/** @internal */
 export type PushoverRequest = {
 	endpoint: string;
 	method: 'GET' | 'POST';

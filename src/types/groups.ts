@@ -7,6 +7,7 @@ export type GroupAddUserOptions = {
 	memo?: string;
 };
 
+/** @internal */
 export type GroupAddUserParameters = {
 	token: string;
 	user: string;
@@ -20,6 +21,7 @@ export type GroupSelectUserOptions = {
 	device?: string;
 };
 
+/** @internal */
 export type GroupSelectUserParameters = {
 	token: string;
 	user: string;
