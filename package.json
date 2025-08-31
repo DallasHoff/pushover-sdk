@@ -30,6 +30,7 @@
 	"author": "Dallas Hoffman",
 	"license": "MIT",
 	"description": "Call Pushover's APIs from any JavaScript runtime with fully typed inputs and responses.",
+	"homepage": "https://pushover-sdk.pages.dev",
 	"keywords": [
 		"pushover",
 		"sdk",
