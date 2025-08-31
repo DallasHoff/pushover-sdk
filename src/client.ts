@@ -88,7 +88,7 @@ export class Pushover {
 
 	/**
 	 * Send a push notification.
-	 * @link https://pushover.net/api
+	 * @see {@link https://pushover.net/api}
 	 */
 	sendMessage = async (
 		message: string | MessageOptions,
@@ -128,7 +128,7 @@ export class Pushover {
 
 	/**
 	 * Fetch a list of available notification sounds.
-	 * @link https://pushover.net/api#sounds
+	 * @see {@link https://pushover.net/api#sounds}
 	 */
 	getSounds = async (): Promise<SoundsResponse> => {
 		return this.callPushover({
@@ -140,7 +140,7 @@ export class Pushover {
 
 	/**
 	 * Fetch usage limit information.
-	 * @link https://pushover.net/api#limits
+	 * @see {@link https://pushover.net/api#limits}
 	 */
 	getLimits = async (): Promise<LimitsResponse> => {
 		return this.callPushover({
@@ -152,7 +152,7 @@ export class Pushover {
 
 	/**
 	 * Check that a passed user key is valid.
-	 * @link https://pushover.net/api#validate
+	 * @see {@link https://pushover.net/api#validate}
 	 */
 	validateUser = async (
 		user: string,
@@ -167,7 +167,7 @@ export class Pushover {
 
 	/**
 	 * Check the status of a receipt from an emergency-priority notification.
-	 * @link https://pushover.net/api/receipts
+	 * @see {@link https://pushover.net/api/receipts}
 	 */
 	getReceipt = async (receiptId: string): Promise<ReceiptResponse> => {
 		return this.callPushover({
@@ -179,7 +179,7 @@ export class Pushover {
 
 	/**
 	 * Cancel retries of an emergency-priority notification by its receipt ID.
-	 * @link https://pushover.net/api/receipts#cancel
+	 * @see {@link https://pushover.net/api/receipts#cancel}
 	 */
 	cancelReceipt = async (receiptId: string): Promise<PushoverResponse> => {
 		return this.callPushover({
@@ -191,7 +191,7 @@ export class Pushover {
 
 	/**
 	 * Cancel retries of emergency-priority notifications by a tag.
-	 * @link https://pushover.net/api/receipts#cancel_by_tag
+	 * @see {@link https://pushover.net/api/receipts#cancel_by_tag}
 	 */
 	cancelReceiptsByTag = async (
 		tag: string,
@@ -205,7 +205,7 @@ export class Pushover {
 
 	/**
 	 * Update the data displayed on a widget.
-	 * @link https://pushover.net/api/glances
+	 * @see {@link https://pushover.net/api/glances}
 	 */
 	updateGlances = async (
 		options: GlanceOptions = {},
@@ -230,7 +230,7 @@ export class Pushover {
 
 	/**
 	 * Create a message delivery group.
-	 * @link https://pushover.net/api/groups#create
+	 * @see {@link https://pushover.net/api/groups#create}
 	 */
 	createGroup = async (name: string): Promise<GroupCreateResponse> => {
 		return this.callPushover({
@@ -242,7 +242,7 @@ export class Pushover {
 
 	/**
 	 * Fetch a list of available message delivery groups.
-	 * @link https://pushover.net/api/groups#list
+	 * @see {@link https://pushover.net/api/groups#list}
 	 */
 	getGroups = async (): Promise<GroupListResponse> => {
 		return this.callPushover({
@@ -254,7 +254,7 @@ export class Pushover {
 
 	/**
 	 * Fetch information about a message delivery group.
-	 * @link https://pushover.net/api/groups#show
+	 * @see {@link https://pushover.net/api/groups#show}
 	 */
 	getGroup = async (groupId: string): Promise<GroupInfoResponse> => {
 		return this.callPushover({
@@ -266,7 +266,7 @@ export class Pushover {
 
 	/**
 	 * Rename a message delivery group.
-	 * @link https://pushover.net/api/groups#rename
+	 * @see {@link https://pushover.net/api/groups#rename}
 	 */
 	renameGroup = async (
 		groupId: string,
@@ -281,7 +281,7 @@ export class Pushover {
 
 	/**
 	 * Add a user to a message delivery group.
-	 * @link https://pushover.net/api/groups#add_user
+	 * @see {@link https://pushover.net/api/groups#add_user}
 	 */
 	addGroupUser = async (
 		options: GroupAddUserOptions,
@@ -302,7 +302,7 @@ export class Pushover {
 
 	/**
 	 * Remove a user from a message delivery group.
-	 * @link https://pushover.net/api/groups#remove_user
+	 * @see {@link https://pushover.net/api/groups#remove_user}
 	 */
 	removeGroupUser = async (
 		options: GroupSelectUserOptions,
@@ -322,7 +322,7 @@ export class Pushover {
 
 	/**
 	 * Temporarily stop sending messages to a user in a message delivery group.
-	 * @link https://pushover.net/api/groups#disable_user
+	 * @see {@link https://pushover.net/api/groups#disable_user}
 	 */
 	disableGroupUser = async (
 		options: GroupSelectUserOptions,
@@ -342,7 +342,7 @@ export class Pushover {
 
 	/**
 	 * Resume sending messages to a user in a message delivery group.
-	 * @link https://pushover.net/api/groups#enable_user
+	 * @see {@link https://pushover.net/api/groups#enable_user}
 	 */
 	enableGroupUser = async (
 		options: GroupSelectUserOptions,
@@ -362,7 +362,7 @@ export class Pushover {
 
 	/**
 	 * Fetch the number of available license credits.
-	 * @link http://pushover.net/api/licensing#check
+	 * @see {@link http://pushover.net/api/licensing#check}
 	 */
 	getLicenseCredits = async (): Promise<LicenseResponse> => {
 		return this.callPushover({
@@ -374,7 +374,7 @@ export class Pushover {
 
 	/**
 	 * Assign a license to a user.
-	 * @link https://pushover.net/api/licensing#assign
+	 * @see {@link https://pushover.net/api/licensing#assign}
 	 */
 	assignLicense = async (options: LicenseOptions): Promise<LicenseResponse> => {
 		const parameters: LicenseParameters = {
@@ -393,7 +393,7 @@ export class Pushover {
 
 	/**
 	 * Add a user to a team.
-	 * @link https://pushover.net/api/teams#add_user
+	 * @see {@link https://pushover.net/api/teams#add_user}
 	 */
 	addTeamUser = async (options: TeamOptions): Promise<PushoverResponse> => {
 		const parameters: TeamParameters = {
@@ -415,7 +415,7 @@ export class Pushover {
 
 	/**
 	 * Remove a user from a team.
-	 * @link https://pushover.net/api/teams#remove_user
+	 * @see {@link https://pushover.net/api/teams#remove_user}
 	 */
 	removeTeamUser = async (email: string): Promise<PushoverResponse> => {
 		return this.callPushover({
