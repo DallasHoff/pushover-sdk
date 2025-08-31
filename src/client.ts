@@ -40,8 +40,20 @@ import type {
 } from './types/groups.js';
 import { PushoverResponseError } from './errors.js';
 
+/**
+ * This class is to send requests to the {@link https://pushover.net/api | Pushover API}.
+ * Each method represents one endpoint in the API.
+ *
+ * All methods take API parameters as options and return a Promise that resolves
+ * to the response data from the Pushover API.
+ *
+ * A Pushover API token must be passed at class construction, and a user key can
+ * either be passed at construction as a default or passed to individual method calls.
+ */
 export class Pushover {
+	/** Your application's Pushover API token */
 	token: string;
+	/** The user/group key representing the default recipient(s) of messages sent */
 	user: string | undefined;
 
 	constructor(options: PushoverOptions) {

@@ -8,10 +8,14 @@
 		"build": "zshy",
 		"typecheck": "tsc --noEmit",
 		"format": "prettier . --write",
+		"docs:build": "typedoc",
+		"docs:preview": "serve docs",
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
 		"prettier": "^3.6.2",
+		"serve": "^14.2.4",
+		"typedoc": "^0.28.11",
 		"typescript": "^5.9.2",
 		"zshy": "^0.3.5"
 	},

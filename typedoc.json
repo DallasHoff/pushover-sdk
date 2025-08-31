@@ -1,0 +1,13 @@
+{
+	"$schema": "https://typedoc.org/schema.json",
+	"entryPoints": ["./src/index.ts"],
+	"out": "docs",
+	"githubPages": false,
+	"hostedBaseUrl": "https://pushover.dallashoffman.com",
+	"navigationLinks": {
+		"GitHub": "https://github.com/DallasHoff/pushover-sdk",
+		"NPM": "https://www.npmjs.com/package/pushover-sdk"
+	},
+	"headings": { "readme": false },
+	"kindSortOrder": ["Class", "TypeAlias", "Enum", "Variable"]
+}
