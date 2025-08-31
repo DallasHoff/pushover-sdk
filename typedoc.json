@@ -3,7 +3,7 @@
 	"entryPoints": ["./src/index.ts"],
 	"out": "docs",
 	"githubPages": false,
-	"hostedBaseUrl": "https://pushover.dallashoffman.com",
+	"hostedBaseUrl": "https://pushover-sdk.pages.dev",
 	"navigationLinks": {
 		"GitHub": "https://github.com/DallasHoff/pushover-sdk",
 		"NPM": "https://www.npmjs.com/package/pushover-sdk"

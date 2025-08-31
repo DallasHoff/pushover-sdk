@@ -2,7 +2,7 @@
 
 A TypeScript SDK for calling [Pushover APIs](https://pushover.net/api) from any JavaScript runtime with fully typed inputs and responses.
 
-[Documentation](https://pushover.dallashoffman.com) - [GitHub](https://github.com/DallasHoff/pushover-sdk) - [NPM](https://www.npmjs.com/package/pushover-sdk)
+[Documentation](https://pushover-sdk.pages.dev) - [GitHub](https://github.com/DallasHoff/pushover-sdk) - [NPM](https://www.npmjs.com/package/pushover-sdk)
 
 ## Features
 
