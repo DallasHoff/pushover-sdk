@@ -111,11 +111,13 @@ export type SoundsResponse = PushoverResponse & {
 	sounds: Record<Sound, string>;
 };
 
-export type LimitsResponse = PushoverResponse & {
+export type Limits = {
 	limit: number;
 	remaining: number;
 	reset: number;
 };
+
+export type LimitsResponse = PushoverResponse & Limits;
 
 export type ValidationResponse = PushoverResponse & {
 	devices: string[];

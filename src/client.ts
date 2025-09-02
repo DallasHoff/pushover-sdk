@@ -13,6 +13,7 @@ import type {
 	PushoverRequest,
 } from './types/pushover.js';
 import type {
+	Limits,
 	LimitsResponse,
 	MessageOptions,
 	MessageParameters,
@@ -56,6 +57,18 @@ export class Pushover {
 	/** The user/group key representing the default recipient(s) of messages sent */
 	user: string | undefined;
 
+	private _limits: Partial<Limits> = {};
+
+	/**
+	 * Object containing the latest received usage limit information.
+	 * It is automatically updated whenever {@link Pushover.sendMessage}
+	 * or {@link Pushover.getLimits} are called.
+	 * @see {@link https://pushover.net/api#limits}
+	 */
+	get limits(): Partial<Limits> {
+		return this._limits;
+	}
+
 	constructor(options: PushoverOptions) {
 		this.token = options.token;
 		this.user = options.user;
@@ -90,6 +103,14 @@ export class Pushover {
 		const body = method === 'POST' ? formData : undefined;
 		const res = await fetch(url, { method, body });
 		const data = (await res.json()) as T;
+
+		const limit = res.headers.get('X-Limit-App-Limit');
+		const remaining = res.headers.get('X-Limit-App-Remaining');
+		const reset = res.headers.get('X-Limit-App-Reset');
+
+		if (limit) this._limits.limit = parseInt(limit);
+		if (remaining) this._limits.remaining = parseInt(remaining);
+		if (reset) this._limits.reset = parseInt(reset);
 
 		if (data.status !== 1) {
 			throw new PushoverResponseError(JSON.stringify(data));
@@ -155,11 +176,19 @@ export class Pushover {
 	 * @see {@link https://pushover.net/api#limits}
 	 */
 	getLimits = async (): Promise<LimitsResponse> => {
-		return this.callPushover({
+		const res = await this.callPushover<LimitsResponse>({
 			endpoint: 'apps/limits',
 			method: 'GET',
 			parameters: { token: this.token },
 		});
+
+		this._limits = {
+			limit: res.limit,
+			remaining: res.remaining,
+			reset: res.reset,
+		};
+
+		return res;
 	};
 
 	/**
