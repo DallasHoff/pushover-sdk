@@ -100,9 +100,16 @@ export class Pushover {
 			formData.set('attachment', request.attachment);
 		}
 
-		const body = method === 'POST' ? formData : undefined;
-		const res = await fetch(url, { method, body });
-		const data = (await res.json()) as T;
+		let res: Response;
+		let data: T;
+
+		try {
+			const body = method === 'POST' ? formData : undefined;
+			res = await fetch(url, { method, body });
+			data = await res.json();
+		} catch (err) {
+			throw new PushoverResponseError('Request to Pushover failed', err);
+		}
 
 		const limit = res.headers.get('X-Limit-App-Limit');
 		const remaining = res.headers.get('X-Limit-App-Remaining');
