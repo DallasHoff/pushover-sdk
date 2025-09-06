@@ -13,7 +13,7 @@ A TypeScript SDK for calling [Pushover APIs](https://pushover.net/api) from any 
 - 🤝 Works with ESM and CommonJS codebases
 - ⚡️ Tiny: no dependencies
 
-## Example
+## Examples
 
 ```typescript
 import { Pushover } from 'pushover-sdk';
@@ -24,6 +24,17 @@ const pushover = new Pushover({
 });
 
 await pushover.sendMessage('This is a push notification!');
+
+await pushover.sendMessage({
+	title: 'Hello World',
+	message: 'This notification has a title and link.',
+	url: 'https://example.com/',
+});
+
+await pushover.updateGlances({
+	text: 'Update a Glance',
+	percent: 75,
+});
 ```
 
 ## Install
