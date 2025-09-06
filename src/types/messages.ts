@@ -75,7 +75,7 @@ export enum Priority {
 	EMERGENCY = 2,
 }
 
-export const sounds = [
+export const DEFAULT_SOUNDS = [
 	'pushover',
 	'bike',
 	'bugle',
@@ -101,7 +101,7 @@ export const sounds = [
 	'none',
 ] as const;
 
-export type Sound = (string & {}) | (typeof sounds)[number];
+export type Sound = (string & {}) | (typeof DEFAULT_SOUNDS)[number];
 
 export type MessageResponse = PushoverResponse & {
 	receipt?: string;

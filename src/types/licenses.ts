@@ -1,8 +1,8 @@
 import type { PushoverResponse } from './pushover.js';
 
-export const licenseOperatingSystems = ['Android', 'iOS', 'Desktop'] as const;
+export const LICENSE_OPERATING_SYSTEMS = ['Android', 'iOS', 'Desktop'] as const;
 
-export type LicenseOperatingSystem = (typeof licenseOperatingSystems)[number];
+export type LicenseOperatingSystem = (typeof LICENSE_OPERATING_SYSTEMS)[number];
 
 export type LicenseOptions = {
 	os?: LicenseOperatingSystem;
