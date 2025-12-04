@@ -29,7 +29,11 @@ import type {
 	LicenseParameters,
 	LicenseResponse,
 } from './types/licenses.js';
-import type { TeamOptions, TeamParameters } from './types/teams.js';
+import type {
+	TeamOptions,
+	TeamParameters,
+	TeamResponse,
+} from './types/teams.js';
 import type {
 	GroupAddUserOptions,
 	GroupAddUserParameters,
@@ -436,6 +440,18 @@ export class Pushover {
 			endpoint: 'licenses/assign',
 			method: 'POST',
 			parameters,
+		});
+	};
+
+	/**
+	 * Fetch a team's information including users.
+	 * @see {@link https://pushover.net/api/teams#show}
+	 */
+	getTeam = async (): Promise<TeamResponse> => {
+		return this.callPushover({
+			endpoint: 'teams',
+			method: 'GET',
+			parameters: { token: this.token },
 		});
 	};
 

@@ -1,3 +1,6 @@
+import type { LicenseOperatingSystem } from './licenses.js';
+import type { PushoverResponse } from './pushover.js';
+
 export type TeamOptions = {
 	email: string;
 	name?: string;
@@ -16,4 +19,21 @@ export type TeamParameters = {
 	instant: string | undefined;
 	admin: string | undefined;
 	group: string | undefined;
+};
+
+export type TeamResponse = PushoverResponse & {
+	name: string;
+	users: {
+		id: string;
+		name: string;
+		email: string;
+		administrator: boolean;
+		devices: {
+			name: string;
+			os: LicenseOperatingSystem;
+			os_version: string;
+			enabled: boolean;
+			administratively_disabled: boolean;
+		}[];
+	}[];
 };
