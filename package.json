@@ -13,6 +13,7 @@
 		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
+		"jsr": "^0.14.2",
 		"prettier": "^3.8.1",
 		"serve": "^14.2.5",
 		"typedoc": "^0.28.16",

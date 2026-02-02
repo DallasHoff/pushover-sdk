@@ -47,4 +47,6 @@ yarn add pushover-sdk
 pnpm install pushover-sdk
 # or...
 bun add pushover-sdk
+# or...
+deno add jsr:@dallashoff/pushover-sdk
 ```

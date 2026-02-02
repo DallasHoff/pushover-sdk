@@ -23,7 +23,8 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
-		"verbatimModuleSyntax": true
+		"verbatimModuleSyntax": true,
+		"isolatedDeclarations": true
 	},
 	"include": ["src", "test"],
 	"exclude": ["**/node_modules/**", "dist"]
