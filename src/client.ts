@@ -61,6 +61,7 @@ export class Pushover {
 	/** The user/group key representing the default recipient(s) of messages sent */
 	user: string | undefined;
 
+	/** @internal */
 	private _limits: Partial<Limits> = {};
 
 	/**
@@ -78,6 +79,7 @@ export class Pushover {
 		this.user = options.user;
 	}
 
+	/** @internal */
 	private callPushover = async <T extends PushoverResponse>(
 		request: PushoverRequest,
 	): Promise<T> => {
