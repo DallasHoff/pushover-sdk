@@ -148,6 +148,8 @@ export class Pushover {
 			callback:
 				'callback' in options ? normalizeUrl(options.callback) : undefined,
 			device: normalizeList(options.device),
+			encrypted:
+				'encrypted' in options ? normalizeFlag(options.encrypted) : undefined,
 			expire: 'expire' in options ? normalizeInt(options.expire) : undefined,
 			html: 'html' in options ? normalizeFlag(options.html) : undefined,
 			monospace:

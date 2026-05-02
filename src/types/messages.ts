@@ -4,6 +4,7 @@ export type MessageOptions = {
 	message: string;
 	user?: string | string[];
 	device?: string | string[];
+	encrypted?: boolean;
 	sound?: Sound;
 	timestamp?: number | Date;
 	title?: string;
@@ -50,6 +51,7 @@ export type MessageParameters = {
 	message: string;
 	callback: string | undefined;
 	device: string | undefined;
+	encrypted: '1' | undefined;
 	expire: string | undefined;
 	html: '1' | undefined;
 	monospace: '1' | undefined;
