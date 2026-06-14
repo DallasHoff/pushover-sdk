@@ -1,0 +1,26 @@
+name: Publish to JSR
+on:
+  push:
+    branches:
+      - main
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@900f2210b1d28bbbd0bd22d17926b9e224e8f231
+      - name: Use Node.js
+        uses: actions/setup-node@670825a89dc0abd596e7a3abd0f5e3f6e5faf37c
+        with:
+          node-version: '22.14.0'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Pre-publish Checks
+        run: npm run prepublishOnly
+      - name: Run JSR Publish
+        run: npx jsr publish
