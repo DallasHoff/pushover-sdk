@@ -8,7 +8,7 @@ A TypeScript SDK for calling [Pushover APIs](https://pushover.net/api) from any 
 
 - 📲 Get push notifications from your JavaScript or TypeScript app
 - ⚙️ Supports Node.js, Deno, Bun, Cloudflare Workers... anything with the standard Fetch API
-- 🔋 Fully supports the entire Pushover API, including Receipts, Glances, Groups, and Teams
+- 🔋 Fully supports the entire Pushover API, including encryption, Receipts, Glances, Groups, and Teams
 - 🛠️ Every method has TypeScript types for the arguments each endpoint takes and what it returns
 - 🤝 Works with ESM and CommonJS codebases
 - ⚡️ Tiny: no dependencies
@@ -34,6 +34,15 @@ await pushover.sendMessage({
 await pushover.updateGlances({
 	text: 'Update a Glance',
 	percent: 75,
+});
+
+const encryptionKey = Pushover.generateEncryptionKey();
+console.log('Enter this key in the Pushover app:', encryptionKey);
+
+await pushover.sendEncryptedMessage({
+	title: 'Confidential',
+	message: 'Secret Message',
+	encryptionKey,
 });
 ```
 

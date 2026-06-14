@@ -1,6 +1,7 @@
 export type PushoverOptions = {
 	token: string;
 	user?: string;
+	encryptionKey?: string;
 };
 
 /** @internal */

@@ -1,12 +1,4 @@
-import {
-	normalizeFileType,
-	normalizeFlag,
-	normalizeInt,
-	normalizeList,
-	normalizeTime,
-	normalizeUrl,
-	normalizeUser,
-} from './normalize.js';
+import { normalizeInt, normalizeMessage, normalizeUser } from './normalize.js';
 import type {
 	PushoverResponse,
 	PushoverOptions,
@@ -16,7 +8,6 @@ import type {
 	Limits,
 	LimitsResponse,
 	MessageOptions,
-	MessageParameters,
 	MessageResponse,
 	ReceiptResponse,
 	ReceiptsCanceledResponse,
@@ -43,7 +34,8 @@ import type {
 	GroupSelectUserOptions,
 	GroupSelectUserParameters,
 } from './types/groups.js';
-import { PushoverResponseError } from './errors.js';
+import { PushoverParameterError, PushoverResponseError } from './errors.js';
+import { encrypt, ENCRYPTABLE_FIELDS } from './encryption.js';
 
 /**
  * This class is to send requests to the {@link https://pushover.net/api | Pushover API}.
@@ -52,14 +44,17 @@ import { PushoverResponseError } from './errors.js';
  * All methods take API parameters as options and return a Promise that resolves
  * to the response data from the Pushover API.
  *
- * A Pushover API token must be passed at class construction, and a user key can
- * either be passed at construction as a default or passed to individual method calls.
+ * A Pushover API token must be passed at class construction, and a user key and
+ * encryption key can either be passed at construction as a default or passed
+ * to individual method calls.
  */
 export class Pushover {
 	/** Your application's Pushover API token */
 	token: string;
 	/** The user/group key representing the default recipient(s) of messages sent */
 	user: string | undefined;
+	/** The key to use when sending end-to-end encrypted messages */
+	encryptionKey: string | undefined;
 
 	/** @internal */
 	private _limits: Partial<Limits> = {};
@@ -77,6 +72,7 @@ export class Pushover {
 	constructor(options: PushoverOptions) {
 		this.token = options.token;
 		this.user = options.user;
+		this.encryptionKey = options.encryptionKey;
 	}
 
 	/** @internal */
@@ -140,31 +136,7 @@ export class Pushover {
 		message: string | MessageOptions,
 	): Promise<MessageResponse> => {
 		const options = typeof message === 'string' ? { message } : message;
-
-		const parameters: MessageParameters = {
-			token: this.token,
-			user: normalizeUser(normalizeList(options.user) ?? this.user),
-			message: options.message,
-			callback:
-				'callback' in options ? normalizeUrl(options.callback) : undefined,
-			device: normalizeList(options.device),
-			encrypted:
-				'encrypted' in options ? normalizeFlag(options.encrypted) : undefined,
-			expire: 'expire' in options ? normalizeInt(options.expire) : undefined,
-			html: 'html' in options ? normalizeFlag(options.html) : undefined,
-			monospace:
-				'monospace' in options ? normalizeFlag(options.monospace) : undefined,
-			priority: normalizeInt(options.priority),
-			retry: 'retry' in options ? normalizeInt(options.retry) : undefined,
-			sound: options.sound,
-			tags: 'tags' in options ? normalizeList(options.tags) : undefined,
-			timestamp: normalizeTime(options.timestamp),
-			title: options.title,
-			ttl: normalizeInt(options.ttl),
-			url: normalizeUrl(options.url),
-			url_title: 'urlTitle' in options ? options.urlTitle : undefined,
-			attachment_type: normalizeFileType(options.attachment),
-		};
+		const parameters = normalizeMessage(this.token, this.user, options);
 
 		return this.callPushover({
 			endpoint: 'messages',
@@ -173,6 +145,47 @@ export class Pushover {
 			attachment: options.attachment,
 		});
 	};
+
+	/**
+	 * Send a push notification with end-to-end encryption.
+	 * @see {@link https://pushover.net/api#e2ee}
+	 */
+	sendEncryptedMessage = async (
+		message: string | (MessageOptions & { encryptionKey?: string }),
+	): Promise<MessageResponse> => {
+		const options = typeof message === 'string' ? { message } : message;
+		options.encrypted = true;
+		const parameters = normalizeMessage(this.token, this.user, options);
+		const key = options.encryptionKey ?? this.encryptionKey;
+
+		if (!key) {
+			throw new PushoverParameterError('No encryption key specified');
+		}
+
+		for (let field of ENCRYPTABLE_FIELDS) {
+			if (parameters[field]) {
+				parameters[field] = await encrypt(parameters[field], key);
+			}
+		}
+
+		return this.callPushover({
+			endpoint: 'messages',
+			method: 'POST',
+			parameters,
+			attachment: options.attachment,
+		});
+	};
+
+	/**
+	 * Generate a new, random encryption key for end-to-end encryption.
+	 * @see {@link https://pushover.net/api#e2ee}
+	 */
+	static generateEncryptionKey(): string {
+		const bytes = crypto.getRandomValues(new Uint8Array(32));
+		return Array.from(bytes)
+			.map((b) => b.toString(16).padStart(2, '0'))
+			.join('');
+	}
 
 	/**
 	 * Fetch a list of available notification sounds.

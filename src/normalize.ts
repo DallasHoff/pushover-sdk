@@ -1,4 +1,5 @@
 import { PushoverParameterError } from './errors.js';
+import type { MessageOptions, MessageParameters } from './types/messages.js';
 
 export function normalizeInt(input: number | undefined): string | undefined {
 	return typeof input === 'number' ? Math.round(input).toString() : undefined;
@@ -43,4 +44,36 @@ export function normalizeUser(input: string | undefined): string {
 		throw new PushoverParameterError('No user specified');
 	}
 	return input;
+}
+
+export function normalizeMessage(
+	token: string,
+	user: string | undefined,
+	options: MessageOptions,
+): MessageParameters {
+	const parameters: MessageParameters = {
+		token,
+		user: normalizeUser(normalizeList(options.user) ?? user),
+		message: options.message,
+		callback:
+			'callback' in options ? normalizeUrl(options.callback) : undefined,
+		device: normalizeList(options.device),
+		encrypted:
+			'encrypted' in options ? normalizeFlag(options.encrypted) : undefined,
+		expire: 'expire' in options ? normalizeInt(options.expire) : undefined,
+		html: 'html' in options ? normalizeFlag(options.html) : undefined,
+		monospace:
+			'monospace' in options ? normalizeFlag(options.monospace) : undefined,
+		priority: normalizeInt(options.priority),
+		retry: 'retry' in options ? normalizeInt(options.retry) : undefined,
+		sound: options.sound,
+		tags: 'tags' in options ? normalizeList(options.tags) : undefined,
+		timestamp: normalizeTime(options.timestamp),
+		title: options.title,
+		ttl: normalizeInt(options.ttl),
+		url: normalizeUrl(options.url),
+		url_title: 'urlTitle' in options ? options.urlTitle : undefined,
+		attachment_type: normalizeFileType(options.attachment),
+	};
+	return parameters;
 }

@@ -1,17 +1,20 @@
 import { PushoverParameterError } from './errors.js';
 
 /**
- * TODO
+ * List of the fields for which Pushover supports end-to-end encryption.
  */
-export function generateEncryptionKey(): string {
-	const bytes = crypto.getRandomValues(new Uint8Array(32));
-	return Array.from(bytes)
-		.map((b) => b.toString(16).padStart(2, '0'))
-		.join('');
-}
+export const ENCRYPTABLE_FIELDS = [
+	'message',
+	'title',
+	'url',
+	'url_title',
+] as const;
 
 /**
- * TODO
+ * Encrypts a string using Pushover's end-to-end encryption scheme.
+ * @param message The string to encrypt
+ * @param encryptionKey The encryption key as a hexidecimal string
+ * @returns The encrypted string as a Base64 string
  */
 export async function encrypt(
 	message: string,
