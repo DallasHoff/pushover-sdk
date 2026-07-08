@@ -495,6 +495,18 @@ export class Pushover {
 	};
 
 	/**
+	 * Revoke a pending team invitation.
+	 * @see {@link https://pushover.net/api/teams#revoke_invitation}
+	 */
+	revokeTeamInvitation = async (email: string): Promise<PushoverResponse> => {
+		return this.callPushover({
+			endpoint: 'teams/revoke_invitation',
+			method: 'POST',
+			parameters: { token: this.token, email },
+		});
+	};
+
+	/**
 	 * Remove a user from a team.
 	 * @see {@link https://pushover.net/api/teams#remove_user}
 	 */
